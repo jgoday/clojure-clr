@@ -96,7 +96,7 @@ namespace Clojure.Tests.LibTests
         [SetUp]
         public void Setup()
         {
-            _createFn = (start, end) => (object)Range.create(start, end);
+            _createFn = (start, end) => (object) clojure.lang.Range.create(start, end);
         }
     }
 
@@ -118,8 +118,8 @@ namespace Clojure.Tests.LibTests
     {
         #region Setup
 
-        Range _r;
-        Range _rWithMeta;
+        clojure.lang.Range _r;
+        clojure.lang.Range _rWithMeta;
         object[] _values;
 
         [SetUp]
@@ -127,8 +127,8 @@ namespace Clojure.Tests.LibTests
         {
             IPersistentMap meta = PersistentHashMap.create("a", 1, "b", 2);
 
-            _r = (Range)Range.create(2L, 5L);
-            _rWithMeta = (Range)_r.withMeta(meta);
+            _r = (clojure.lang.Range) clojure.lang.Range.create(2L, 5L);
+            _rWithMeta = (clojure.lang.Range) _r.withMeta(meta);
             _values = new object[] { 2, 3, 4 };
         }
 
@@ -159,7 +159,7 @@ namespace Clojure.Tests.LibTests
         [Test]
         public void Rest_preserves_type()
         {
-            VerifyISeqRestTypes(_r, typeof(Range));
+            VerifyISeqRestTypes(_r, typeof(clojure.lang.Range));
         }
 
         [Test]
@@ -179,11 +179,11 @@ namespace Clojure.Tests.LibTests
         {
             IPersistentMap meta = new DummyMeta();
 
-            Range r = (Range)Range.create(2L, 5L);
+            clojure.lang.Range r = (clojure.lang.Range) clojure.lang.Range.create(2L, 5L);
 
             _objWithNullMeta = (IObj)r;
             _obj = _objWithNullMeta.withMeta(meta);
-            _expectedType = typeof(Range);
+            _expectedType = typeof(clojure.lang.Range);
         }
     }
 

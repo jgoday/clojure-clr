@@ -420,7 +420,8 @@ namespace clojure.lang
             gen.Emit(OpCodes.Ret);
 
             //context.AssyBldr.SetEntryPoint(cb);
-            context.AssemblyBuilder.SetEntryPoint(cb);
+            // TODO: JG!!
+            // context.AssemblyBuilder.SetEntryPoint(cb);
         }
 
         private static void EmitMethods(TypeBuilder proxyTB, 

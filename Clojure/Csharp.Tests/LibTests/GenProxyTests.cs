@@ -735,7 +735,8 @@ namespace Clojure.Tests.LibTests
                 }
 
                 return null;
-            }        }
+            }
+        }
 
         Type _proxyType;
         Object _obj;
@@ -826,8 +827,11 @@ namespace Clojure.Tests.LibTests
         public void FindTypeInAssembly()
         {
             AssemblyName aname = new AssemblyName("MyAssy");
-            AssemblyBuilder assyBldr = AppDomain.CurrentDomain.DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, ".");
-            ModuleBuilder moduleBldr = assyBldr.DefineDynamicModule(aname.Name, aname.Name + ".dll", true);
+            // TODO: JG!!
+            // AssemblyBuilder assyBldr = AppDomain.CurrentDomain.DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, ".");
+            // ModuleBuilder moduleBldr = assyBldr.DefineDynamicModule(aname.Name, aname.Name + ".dll", true);
+            AssemblyBuilder assyBldr = AssemblyBuilder.DefineDynamicAssembly(aname, AssemblyBuilderAccess.Run);
+            ModuleBuilder moduleBldr = assyBldr.DefineDynamicModule(aname.Name);
             TypeBuilder tb = moduleBldr.DefineType("clojure.proxy.LongName.MyType", TypeAttributes.Public);
             Type myType = tb.CreateType();
 
@@ -926,8 +930,11 @@ namespace Clojure.Tests.LibTests
         public void CanCreateConcreteImplementationOverAbstractProperty()
         {
             AssemblyName aname = new AssemblyName("MyAssy2");
-            AssemblyBuilder assyBldr = AppDomain.CurrentDomain.DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, ".");
-            ModuleBuilder moduleBldr = assyBldr.DefineDynamicModule(aname.Name, aname.Name + ".dll", true);
+            // TODO: JG!!
+            // AssemblyBuilder assyBldr = AppDomain.CurrentDomain.DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave, ".");
+            // ModuleBuilder moduleBldr = assyBldr.DefineDynamicModule(aname.Name, aname.Name + ".dll", true);
+            AssemblyBuilder assyBldr = AssemblyBuilder.DefineDynamicAssembly(aname, AssemblyBuilderAccess.Run);
+            ModuleBuilder moduleBldr = assyBldr.DefineDynamicModule(aname.Name);
             TypeBuilder tb = moduleBldr.DefineType("C1Impl", TypeAttributes.Public, typeof(C1));
             tb.AddInterfaceImplementation(typeof(I1));
 

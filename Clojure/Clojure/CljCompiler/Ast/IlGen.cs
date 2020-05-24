@@ -17,9 +17,8 @@ using System;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
-using Microsoft.Scripting.Generation;
 using System.Collections.Generic;
-
+using Microsoft.Scripting.Generation;
 
 namespace clojure.lang.CljCompiler.Ast
 {

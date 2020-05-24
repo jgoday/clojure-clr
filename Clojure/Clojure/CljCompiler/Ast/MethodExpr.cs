@@ -15,11 +15,8 @@
 using System;
 using System.Collections.Generic;
 
-#if CLR2
 using Microsoft.Scripting.Ast;
-#else
 using System.Linq.Expressions;
-#endif
 using System.Dynamic;
 using System.Reflection;
 using clojure.lang.Runtime.Binding;
@@ -362,7 +359,8 @@ namespace clojure.lang.CljCompiler.Ast
             else
             {
                 mbLambda = context.TB.DefineMethod(methodName, MethodAttributes.Static | MethodAttributes.Public, CallingConventions.Standard, returnType, paramTypes);
-                lambda.CompileToMethod(mbLambda);
+                // TODO: JG!!
+                // lambda.CompileToMethod(mbLambda);
             }
         }
 
@@ -420,7 +418,8 @@ namespace clojure.lang.CljCompiler.Ast
                     {
                         EmitTypedArg(objx, ilg, parms[i].ParameterType, args[i].ArgExpr);
                         LocalBuilder loc = ilg.DeclareLocal(pi.ParameterType);
-                        loc.SetLocalSymInfo("_byRef_temp" + i);
+                        // TODO: JG!!!
+                        // loc.SetLocalSymInfo("_byRef_temp" + i);
                         ilg.Emit(OpCodes.Stloc, loc);
                         ilg.Emit(OpCodes.Ldloca, loc);
                     }

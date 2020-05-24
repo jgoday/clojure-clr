@@ -17,15 +17,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection.Emit;
 using System.Reflection;
-#if CLR2
 using Microsoft.Scripting.Ast;
-#else
 using System.Linq.Expressions;
-#endif
 using Microsoft.Scripting.Generation;
 using System.Runtime.CompilerServices;
 using Microsoft.Scripting.Utils;
 using Microsoft.Scripting.Runtime;
+
 
 
 namespace clojure.lang.CljCompiler.Ast
@@ -189,10 +187,10 @@ namespace clojure.lang.CljCompiler.Ast
                 return false;
             }
 
-            if (module.IsTransient())
-            {
-                return true;
-            }
+            // if (module.IsTransient())
+            // {
+            //     return true;
+            // }
 
             if (Snippets.Shared.SaveSnippets && module.Assembly != _assemblyGen.AssemblyBuilder)
             {
@@ -273,7 +271,8 @@ namespace clojure.lang.CljCompiler.Ast
                     fbInit.Type,
                     Type.EmptyTypes);
                 LambdaExpression initL = Expression.Lambda(Expression.Assign(Expression.Field(null, fb), fbInit));
-                initL.CompileToMethod(mbSetter);
+                // TODO: JG!!
+                // initL.CompileToMethod(mbSetter);
 
                 gen.EmitCall(mbSetter);
                 gen.Emit(OpCodes.Pop);

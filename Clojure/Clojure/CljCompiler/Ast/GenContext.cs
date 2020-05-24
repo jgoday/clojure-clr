@@ -165,8 +165,9 @@ namespace clojure.lang.CljCompiler.Ast
             _assyGen = new AssemblyGen(aname, directory, extension, _isDebuggable);
             if ( createDynInitHelper )
                 _dynInitHelper = new DynInitHelper(_assyGen, GenerateName());
-            if (_isDebuggable)
-                _docWriter = ModuleBuilder.DefineDocument(sourceName, ClojureContext.Default.LanguageGuid, ClojureContext.Default.VendorGuid, Guid.Empty);
+            // TODO: JG!!
+            // if (_isDebuggable)
+            //     _docWriter = ModuleBuilder.DefineDocument(sourceName, ClojureContext.Default.LanguageGuid, ClojureContext.Default.VendorGuid, Guid.Empty);
             _docInfo = Expression.SymbolDocument(sourceName);
         }
 
@@ -264,7 +265,8 @@ namespace clojure.lang.CljCompiler.Ast
                 {
                     try
                     {
-                        ilg.MarkSequencePoint(_docWriter, startLine, startCol, finishLine, finishCol);
+                        // TODO: JG!!
+                        // ilg.MarkSequencePoint(_docWriter, startLine, startCol, finishLine, finishCol);
                     }
                     catch (NotSupportedException)
                     {
@@ -285,8 +287,9 @@ namespace clojure.lang.CljCompiler.Ast
 
         public void MaybSetLocalName(LocalBuilder lb, string name)
         {
-            if (_isDebuggable)
-                lb.SetLocalSymInfo(name);
+            // TODO: JG!!
+            // if (_isDebuggable)
+            //     lb.SetLocalSymInfo(name);
         }
 
         #endregion
