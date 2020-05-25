@@ -6,8 +6,8 @@
     <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
   </PropertyGroup>
 
-  <!-- <PropertyGroup>
-    <Features>$(Features);FEATURE_LAMBDAEXPRESSION_COMPILETOMETHOD</Features>
+  <!-- <PropertyGroup> 
+    <Features>$(Features);FEATURE_COMPILE_TO_METHODBUILDER;FEATURE_LAMBDAEXPRESSION_COMPILETOMETHOD</Features>
   </PropertyGroup> -->
 
   <ItemGroup>
@@ -22,27 +22,19 @@
     <PackageReference Include="System.Resources.Extensions" Version="4.7.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Properties/Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Properties/Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+  <!--<ItemGroup>
+    <EmbeddedResource Include="Properties/Resources.resx">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CustomToolNamespace>clojure.lang</CustomToolNamespace>
     </EmbeddedResource>
-  </ItemGroup>
+  </ItemGroup>-->
 
-  <!-- <ItemGroup>
+  <!--<ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx" />
-  </ItemGroup> -->
+  </ItemGroup>-->
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Bootstrap\version.properties" />
+    <EmbeddedResource Include="Bootstrap\version.properties" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -50,5 +42,22 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Clojure.Source\Clojure.Source.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Lib\Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <CustomToolNamespace>clojure.lang.Properties</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

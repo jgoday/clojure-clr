@@ -574,6 +574,23 @@ namespace clojure.lang
         
         internal static volatile bool CHECK_SPECS = false;
 
+        private static string ReadVersionFromResources()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            String resourceName = @"Clojure.Bootstrap.version.properties";
+            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                if (stream == null)
+                {
+                    throw new Exception($"Resource {resourceName} not found in {assembly.FullName}.  Valid resources are: {String.Join(", ", assembly.GetManifestResourceNames())}.");
+                }
+                using (var reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static RT()
         {
@@ -592,9 +609,11 @@ namespace clojure.lang
             setup.LanguageSetups.Add(lsetup);
             ScriptRuntime env = new ScriptRuntime(setup);
             env.GetEngine("clj");
+            // https://github.com/microsoft/msbuild/issues/2221
+            _versionProperties.LoadFromString(ReadVersionFromResources());
+            
+            // _versionProperties.LoadFromString(clojure.lang.Properties.Resources.version);; 
 
-
-            _versionProperties.LoadFromString(clojure.lang.Properties.Resources.version); 
 
             Keyword arglistskw = Keyword.intern(null, "arglists");
             Symbol namesym = Symbol.intern("name");

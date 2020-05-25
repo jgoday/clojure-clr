@@ -272,7 +272,12 @@ namespace clojure.lang.CljCompiler.Ast
                     Type.EmptyTypes);
                 LambdaExpression initL = Expression.Lambda(Expression.Assign(Expression.Field(null, fb), fbInit));
                 // TODO: JG!!
+                Microsoft.Scripting.Generation.CompilerHelpers.CompileToMethod(
+                    initL,
+                    mbSetter);
+                // CompilerHelpers.CompileToMethod()
                 // initL.CompileToMethod(mbSetter);
+
 
                 gen.EmitCall(mbSetter);
                 gen.Emit(OpCodes.Pop);
